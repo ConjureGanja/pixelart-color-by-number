@@ -4,6 +4,8 @@ import '../models/pixel_art_data.dart';
 /// High-performance CustomPainter for rendering pixel art grid
 /// Optimized to handle up to 256x256 (65,536 pixels) at 60 FPS
 class PixelBoardPainter extends CustomPainter {
+  /// Minimum pixel size to show numbers
+  static const double minPixelSizeForNumbers = 15.0;
   final PixelArtData pixelData;
   final double pixelSize;
   final bool showNumbers;
@@ -46,7 +48,7 @@ class PixelBoardPainter extends CustomPainter {
           canvas.drawRect(rect, paint);
 
           // Draw number if zoomed in enough and numbers are visible
-          if (showNumbers && pixelSize > 15) {
+          if (showNumbers && pixelSize > minPixelSizeForNumbers) {
             final targetColor = pixelData.getTargetColor(x, y);
             final number = pixelData.getNumberForColor(targetColor);
 

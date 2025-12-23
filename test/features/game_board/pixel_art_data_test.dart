@@ -75,7 +75,7 @@ void main() {
       expect(data.width, size);
       expect(data.height, size);
       expect(data.pixelColors.length, size * size);
-      expect(data.currentColors.length, 65536); // 256 * 256
+      expect(data.currentColors.length, size * size);
     });
 
     test('copyWith creates new instance with updated fields', () {

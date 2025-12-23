@@ -6,6 +6,14 @@ import '../widgets/color_palette_widget.dart';
 
 /// Main game board screen with pixel art canvas and color palette
 class GameBoardScreen extends ConsumerWidget {
+  /// Margin for screen size calculations
+  static const double _screenMarginHorizontal = 100.0;
+  static const double _screenMarginVertical = 300.0;
+  
+  /// Pixel size constraints
+  static const double _minPixelSize = 10.0;
+  static const double _maxPixelSize = 40.0;
+
   const GameBoardScreen({super.key});
 
   @override
@@ -150,8 +158,8 @@ class GameBoardScreen extends ConsumerWidget {
 
   /// Calculate appropriate pixel size based on screen size
   double _calculatePixelSize(int width, int height, Size screenSize) {
-    final availableWidth = screenSize.width - 100;
-    final availableHeight = screenSize.height - 300;
+    final availableWidth = screenSize.width - _screenMarginHorizontal;
+    final availableHeight = screenSize.height - _screenMarginVertical;
 
     final pixelSizeByWidth = availableWidth / width;
     final pixelSizeByHeight = availableHeight / height;
@@ -159,6 +167,6 @@ class GameBoardScreen extends ConsumerWidget {
     return (pixelSizeByWidth < pixelSizeByHeight
             ? pixelSizeByWidth
             : pixelSizeByHeight)
-        .clamp(10.0, 40.0);
+        .clamp(_minPixelSize, _maxPixelSize);
   }
 }
