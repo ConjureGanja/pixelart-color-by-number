@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'src/features/game_board/game_board.dart';
+import 'src/features/ai_generation/ai_generation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +49,7 @@ final _router = GoRouter(
     GoRoute(
       path: '/ai-generation',
       name: 'ai-generation',
-      builder: (context, state) => const AiGenerationScreen(),
+      builder: (context, state) => const GenerationScreen(),
     ),
     GoRoute(
       path: '/game-board',
@@ -64,6 +65,7 @@ final _router = GoRouter(
 );
 
 final routerProvider = Provider<GoRouter>((ref) => _router);
+
 // Placeholder Screens
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -122,40 +124,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class AiGenerationScreen extends StatelessWidget {
-  const AiGenerationScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AI Generation'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.auto_awesome,
-              size: 80,
-              color: Colors.deepPurple,
-            ),
-            SizedBox(height: 20),
-            Text(
-              'AI Generation Feature',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text('Generate color-by-number puzzles with AI'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// GameBoardScreen is now imported from game_board feature
+// GameBoardScreen and GenerationScreen are now imported from their features
 
 class GalleryScreen extends StatelessWidget {
   const GalleryScreen({super.key});

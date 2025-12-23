@@ -4,8 +4,15 @@ A color-by-number coloring game for Android and iOS with AI-powered image genera
 
 ## Features
 
-- 🎨 **AI Generation**: Generate custom color-by-number puzzles using AI
+- 🎨 **AI Generation**: Generate custom color-by-number puzzles using OpenAI DALL-E 3
+  - Choose from 8 art styles (Fantasy, Space, Nature, Abstract, Animals, Architecture, Food, Underwater)
+  - 3 difficulty levels (49x49, 96x96, 256x256)
+  - K-Means color quantization to 32 colors
+  - Custom prompts supported
 - 🎮 **Game Board**: Interactive color-by-number gameplay
+  - High-performance rendering for large grids (up to 256x256)
+  - Zoom and pan with InteractiveViewer
+  - Progress tracking and completion detection
 - 🖼️ **Gallery**: View and manage your completed artworks
 
 ## Architecture
@@ -61,6 +68,20 @@ flutter pub run build_runner build --delete-conflicting-outputs
 ```bash
 flutter run
 ```
+
+### AI Generation Setup
+
+To use the AI generation feature, you need an OpenAI API key:
+
+1. Get your API key from [OpenAI Platform](https://platform.openai.com/api-keys)
+2. Update the API key in `lib/src/features/ai_generation/screens/generation_screen.dart`:
+   ```dart
+   const apiKey = 'YOUR_OPENAI_API_KEY';
+   ```
+
+For production, use secure storage methods (environment variables, Flutter secure storage, etc.).
+
+See [AI_GENERATION_IMPLEMENTATION.md](AI_GENERATION_IMPLEMENTATION.md) for detailed documentation.
 
 ### Building for Production
 

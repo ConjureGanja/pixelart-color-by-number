@@ -114,4 +114,61 @@ class PixelArtData {
       colorToNumber: colorToNumber ?? this.colorToNumber,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PixelArtData) return false;
+
+    // Compare dimensions first (fast check)
+    if (width != other.width || height != other.height) return false;
+
+    // Compare lists content
+    if (pixelColors.length != other.pixelColors.length) return false;
+    if (currentColors.length != other.currentColors.length) return false;
+
+    for (int i = 0; i < pixelColors.length; i++) {
+      if (pixelColors[i].value != other.pixelColors[i].value) return false;
+    }
+
+    for (int i = 0; i < currentColors.length; i++) {
+      final c1 = currentColors[i];
+      final c2 = other.currentColors[i];
+      if (c1 == null && c2 == null) continue;
+      if (c1 == null || c2 == null) return false;
+      if (c1.value != c2.value) return false;
+    }
+
+    // Compare colorToNumber map
+    if (colorToNumber.length != other.colorToNumber.length) return false;
+    for (final entry in colorToNumber.entries) {
+      final otherValue = other.colorToNumber[entry.key];
+      if (otherValue != entry.value) return false;
+    }
+
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    int hash = width.hashCode ^ height.hashCode;
+
+    // Hash a sample of pixels to avoid iterating through all 65k pixels
+    // Sample every 16th pixel for reasonable distribution
+    for (int i = 0; i < pixelColors.length; i += 16) {
+      hash ^= pixelColors[i].value.hashCode;
+    }
+
+    for (int i = 0; i < currentColors.length; i += 16) {
+      final color = currentColors[i];
+      if (color != null) {
+        hash ^= color.value.hashCode;
+      }
+    }
+
+    // Include colorToNumber in hash
+    hash ^= colorToNumber.length.hashCode;
+
+    return hash;
+  }
 }
