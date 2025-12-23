@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'src/features/game_board/game_board.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -155,38 +156,7 @@ class AiGenerationScreen extends StatelessWidget {
   }
 }
 
-class GameBoardScreen extends StatelessWidget {
-  const GameBoardScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Game Board'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.grid_on,
-              size: 80,
-              color: Colors.deepPurple,
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Game Board Feature',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text('Play color-by-number puzzles'),
-          ],
-        ),
-      ),
-    );
-  }
-}
+// GameBoardScreen is now imported from game_board feature
 
 class GalleryScreen extends StatelessWidget {
   const GalleryScreen({super.key});
