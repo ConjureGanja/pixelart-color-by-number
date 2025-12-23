@@ -67,8 +67,16 @@ class PixelArtData {
 
   /// Fill a pixel with a color
   PixelArtData fillPixel(int x, int y, Color color) {
+    final index = getIndex(x, y);
+
+    // If the pixel already has the same color, avoid creating a new list/instance.
+    final existing = currentColors[index];
+    if (existing != null && existing.value == color.value) {
+      return this;
+    }
+
     final newCurrentColors = List<Color?>.from(currentColors);
-    newCurrentColors[getIndex(x, y)] = color;
+    newCurrentColors[index] = color;
     return copyWith(currentColors: newCurrentColors);
   }
 
