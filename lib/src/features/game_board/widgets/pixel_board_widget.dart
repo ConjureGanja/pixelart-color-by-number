@@ -44,9 +44,17 @@ class _PixelBoardWidgetState extends State<PixelBoardWidget> {
       maxScale: 10.0,
       boundaryMargin: const EdgeInsets.all(100),
       onInteractionUpdate: (details) {
-        setState(() {
-          _currentScale = _transformationController.value.getMaxScaleOnAxis();
-        });
+        final newScale =
+            _transformationController.value.getMaxScaleOnAxis();
+        final bool showGridBefore = _currentScale > 0.7;
+        final bool showGridAfter = newScale > 0.7;
+        if (showGridBefore != showGridAfter) {
+          setState(() {
+            _currentScale = newScale;
+          });
+        } else {
+          _currentScale = newScale;
+        }
       },
       child: GestureDetector(
         onTapDown: (details) {

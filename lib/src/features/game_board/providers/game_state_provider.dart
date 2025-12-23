@@ -91,8 +91,12 @@ class PixelArtDataNotifier extends StateNotifier<PixelArtData> {
 
   /// Clear all filled pixels
   void clearAll() {
+    final currentColors = state.currentColors;
+    for (var i = 0; i < currentColors.length; i++) {
+      currentColors[i] = null;
+    }
     state = state.copyWith(
-      currentColors: List.filled(state.width * state.height, null),
+      currentColors: currentColors,
     );
   }
 

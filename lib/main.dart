@@ -37,34 +37,33 @@ class PixelZenApp extends ConsumerWidget {
 }
 
 // Router Provider
-final routerProvider = Provider<GoRouter>((ref) {
-  return GoRouter(
-    initialLocation: '/',
-    routes: [
-      GoRoute(
-        path: '/',
-        name: 'home',
-        builder: (context, state) => const HomeScreen(),
-      ),
-      GoRoute(
-        path: '/ai-generation',
-        name: 'ai-generation',
-        builder: (context, state) => const AiGenerationScreen(),
-      ),
-      GoRoute(
-        path: '/game-board',
-        name: 'game-board',
-        builder: (context, state) => const GameBoardScreen(),
-      ),
-      GoRoute(
-        path: '/gallery',
-        name: 'gallery',
-        builder: (context, state) => const GalleryScreen(),
-      ),
-    ],
-  );
-});
+final _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      name: 'home',
+      builder: (context, state) => const HomeScreen(),
+    ),
+    GoRoute(
+      path: '/ai-generation',
+      name: 'ai-generation',
+      builder: (context, state) => const AiGenerationScreen(),
+    ),
+    GoRoute(
+      path: '/game-board',
+      name: 'game-board',
+      builder: (context, state) => const GameBoardScreen(),
+    ),
+    GoRoute(
+      path: '/gallery',
+      name: 'gallery',
+      builder: (context, state) => const GalleryScreen(),
+    ),
+  ],
+);
 
+final routerProvider = Provider<GoRouter>((ref) => _router);
 // Placeholder Screens
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -100,19 +99,19 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             ElevatedButton.icon(
-              onPressed: () => context.push('/ai-generation'),
+              onPressed: () => context.go('/ai-generation'),
               icon: const Icon(Icons.auto_awesome),
               label: const Text('AI Generation'),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
-              onPressed: () => context.push('/game-board'),
+              onPressed: () => context.go('/game-board'),
               icon: const Icon(Icons.grid_on),
               label: const Text('Game Board'),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
-              onPressed: () => context.push('/gallery'),
+              onPressed: () => context.go('/gallery'),
               icon: const Icon(Icons.photo_library),
               label: const Text('Gallery'),
             ),

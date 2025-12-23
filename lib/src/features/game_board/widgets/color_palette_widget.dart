@@ -35,7 +35,7 @@ class ColorPaletteWidget extends StatelessWidget {
         child: Row(
           children: colors.map((color) {
             final number = colorToNumber[color]!;
-            final isSelected = selectedColor?.value == color.value;
+            final isSelected = selectedColor == color;
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),

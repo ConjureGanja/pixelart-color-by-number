@@ -96,9 +96,9 @@ class PixelBoardPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(PixelBoardPainter oldDelegate) {
-    return oldDelegate.pixelData != pixelData ||
-        oldDelegate.pixelSize != pixelSize ||
-        oldDelegate.showNumbers != showNumbers ||
-        oldDelegate.showGrid != showGrid;
+    // Always repaint to avoid relying on potentially incorrect equality
+    // semantics of PixelArtData. With immutable updates via copyWith,
+    // the painter would repaint on every data change anyway.
+    return true;
   }
 }

@@ -9,4 +9,4 @@ linter:
     - avoid_print
     - prefer_single_quotes
     - always_declare_return_types
-    - require_trailing_commas
+
